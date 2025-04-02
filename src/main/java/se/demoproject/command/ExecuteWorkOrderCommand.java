@@ -7,6 +7,9 @@ public class ExecuteWorkOrderCommand {
     @TargetAggregateIdentifier
     private String id;
 
+    protected ExecuteWorkOrderCommand() {
+    }
+
     public ExecuteWorkOrderCommand(String id) {
         this.id = id;
     }

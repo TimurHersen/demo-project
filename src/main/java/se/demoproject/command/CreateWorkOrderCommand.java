@@ -9,11 +9,9 @@ public class CreateWorkOrderCommand {
     private String id;
     private String instruction;
 
-    // No-argument constructor
     public CreateWorkOrderCommand() {
     }
 
-    // All-argument constructor
     public CreateWorkOrderCommand(String id, String instruction) {
         this.id = id;
         this.instruction = instruction;

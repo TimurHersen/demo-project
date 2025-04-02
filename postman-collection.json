@@ -99,7 +99,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/workorders/{{workOrderId}}",
+          "raw": "http://localhost:8080/workorders/{{workOrderId}}/retrieve",
           "protocol": "http",
           "host": [
             "localhost"

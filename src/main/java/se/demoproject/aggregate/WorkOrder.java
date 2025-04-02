@@ -18,7 +18,6 @@ public class WorkOrder {
     @AggregateIdentifier
     private String orderId;
 
-    // No-argument constructor
     protected WorkOrder() {
     }
 
