@@ -1,0 +1,158 @@
+{
+  "info": {
+    "_postman_id": "9e3f4f1e-5cc3-4e4a-9b66-6c7a8d5c8a0e",
+    "name": "WorkOrder API",
+    "description": "A collection for testing the WorkOrder API with Axon Framework",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create WorkOrder",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"instruction\": \"Replace the broken door handle in room 101\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/workorders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "workorders"
+          ]
+        },
+        "description": "Create a new work order with a specific instruction"
+      },
+      "response": []
+    },
+    {
+      "name": "Assign WorkOrder",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"assignee\": \"John Smith\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/workorders/{{workOrderId}}/assign",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "workorders",
+            "{{workOrderId}}",
+            "assign"
+          ]
+        },
+        "description": "Assign a work order to a person"
+      },
+      "response": []
+    },
+    {
+      "name": "Execute WorkOrder",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"executionNotes\": \"Door handle replaced and tested. Working properly now.\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/workorders/{{workOrderId}}/execute",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "workorders",
+            "{{workOrderId}}",
+            "execute"
+          ]
+        },
+        "description": "Mark a work order as executed with notes"
+      },
+      "response": []
+    },
+    {
+      "name": "Get WorkOrder",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/workorders/{{workOrderId}}",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "workorders",
+            "{{workOrderId}}"
+          ]
+        },
+        "description": "Retrieve details of a specific work order"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Save the workOrderId from the create response",
+          "if (pm.response.code === 201 || pm.response.code === 200) {",
+          "    if (pm.request.method === 'POST' && pm.request.url.path.includes('workorders') && !pm.request.url.path.includes('assign') && !pm.request.url.path.includes('execute')) {",
+          "        const responseData = pm.response.text();",
+          "        if (responseData) {",
+          "            pm.environment.set('workOrderId', responseData.replace(/\"/g, ''));",
+          "            console.log('Work Order ID saved: ' + responseData);",
+          "        }",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "workOrderId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
