@@ -32,4 +32,5 @@ public class CreateWorkOrderCommand {
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
+
 }

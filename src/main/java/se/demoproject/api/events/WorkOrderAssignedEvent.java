@@ -1,6 +1,7 @@
 package se.demoproject.api.events;
 
 public class WorkOrderAssignedEvent {
+
     private String id;
     private String assignee;
 
@@ -27,4 +28,5 @@ public class WorkOrderAssignedEvent {
     public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
+
 }

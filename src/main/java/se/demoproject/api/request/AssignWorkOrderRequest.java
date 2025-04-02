@@ -18,4 +18,5 @@ public class AssignWorkOrderRequest {
     public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
+
 }

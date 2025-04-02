@@ -1,6 +1,7 @@
 package se.demoproject.api.events;
 
 public class WorkOrderCreatedEvent {
+
     private final String id;
     private final String instruction;
 
@@ -16,4 +17,5 @@ public class WorkOrderCreatedEvent {
     public String getInstruction() {
         return instruction;
     }
+
 }

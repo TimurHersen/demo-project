@@ -1,6 +1,7 @@
 package se.demoproject.api.queries;
 
 public class FindWorkOrderQuery {
+
     private String id;
 
     public FindWorkOrderQuery() {
@@ -17,4 +18,5 @@ public class FindWorkOrderQuery {
     public void setId(String id) {
         this.id = id;
     }
+
 }

@@ -1,6 +1,7 @@
 package se.demoproject.api.events;
 
 public class WorkOrderExecutedEvent {
+
     private String id;
 
     public WorkOrderExecutedEvent() {
@@ -17,4 +18,5 @@ public class WorkOrderExecutedEvent {
     public void setId(String id) {
         this.id = id;
     }
+
 }
