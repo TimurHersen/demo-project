@@ -31,8 +31,7 @@ public class WorkOrderController {
 
     @PutMapping({"{id}/assign"})
     public CompletableFuture<Void> assignWorkOrder(@PathVariable String id, @RequestBody AssignWorkOrderCommand command) {
-        commandGateway.send(new AssignWorkOrderCommand(id, command.getAssignedTo()));
-        return null;
+        return commandGateway.send(new AssignWorkOrderCommand(id, command.getAssignedTo()));
     }
 
     @PutMapping("{id}/execute")

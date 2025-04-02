@@ -8,11 +8,9 @@ public class AssignWorkOrderCommand {
     private String id;
     private String assignedTo;
 
-    // No-argument constructor
     public AssignWorkOrderCommand() {
     }
 
-    // All-argument constructor
     public AssignWorkOrderCommand(String id, String assignedTo) {
         this.id = id;
         this.assignedTo = assignedTo;
