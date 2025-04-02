@@ -99,6 +99,27 @@ curl -X PUT http://localhost:8080/workorders/{id}/execute \
 ```bash
 curl -X GET http://localhost:8080/workorders/{id}
 ```
+## API Documentation with Swagger
+
+The application includes Swagger UI for interactive API documentation and testing.
+
+### Accessing Swagger UI
+
+Once the application is running, you can access the Swagger UI at:
+- http://localhost:8080/swagger-ui.html
+
+This provides:
+- Interactive documentation for all endpoints
+- The ability to test API endpoints directly from the browser
+- Request and response schemas
+- Detailed descriptions of parameters and responses
+
+### OpenAPI Specification
+
+The raw OpenAPI specification is available at:
+- http://localhost:8080/api-docs
+
+This can be used with various tools to generate client code or imported into API testing tools.
 
 ## Postman Collection
 
