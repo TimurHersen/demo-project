@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  axon-server:
+    image: axoniq/axonserver:latest
+    container_name: axon-server
+    ports:
+      - "8024:8024"  # HTTP port
+      - "8124:8124"  # gRPC port
+    volumes:
+      - axon-server-data:/data
+      - axon-server-events:/eventdata
+      - axon-server-config:/config
+    environment:
+      - AXONSERVER_HOSTNAME=localhost
+      - AXONSERVER_INTERNAL_HOSTNAME=localhost
+      - AXONSERVER_NAME=axon-server
+      - AXONSERVER_DEVMODE_ENABLED=true
+      - AXONSERVER_ACCESSCONTROL_ENABLED=false
+      - AXONIQ_AXONSERVER_STANDALONE=true
+    networks:
+      - axon-network
+    restart: unless-stopped
+
+volumes:
+  axon-server-data:
+  axon-server-events:
+  axon-server-config:
+
+networks:
+  axon-network:
+    driver: bridge
