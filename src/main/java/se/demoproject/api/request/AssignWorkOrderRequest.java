@@ -1,12 +1,21 @@
 package se.demoproject.api.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AssignWorkOrderRequest {
+
     private String assignee;
+
+    public AssignWorkOrderRequest() {
+    }
+
+    public AssignWorkOrderRequest(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
 }

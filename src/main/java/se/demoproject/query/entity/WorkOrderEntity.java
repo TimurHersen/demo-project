@@ -16,7 +16,6 @@ public class WorkOrderEntity {
     String id;
     String instruction;
     String assignee;
-    String executionNotes;
     String status;
 
 }

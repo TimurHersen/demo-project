@@ -55,7 +55,6 @@ public class WorkOrderQueryHandler {
                         workOrderEntity.getId(),
                         workOrderEntity.getInstruction(),
                         workOrderEntity.getStatus(),
-                        workOrderEntity.getExecutionNotes(),
                         workOrderEntity.getAssignee()
                 )).orElseThrow(() -> new RuntimeException("Could not find work order"));
     }

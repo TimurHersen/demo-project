@@ -6,11 +6,9 @@ public class ExecuteWorkOrderCommand {
 
     @TargetAggregateIdentifier
     private String id;
-    private String executionNotes;
 
-    public ExecuteWorkOrderCommand(String id, String executionNotes) {
+    public ExecuteWorkOrderCommand(String id) {
         this.id = id;
-        this.executionNotes = executionNotes;
     }
 
     public String getId() {
@@ -19,13 +17,5 @@ public class ExecuteWorkOrderCommand {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getExecutionNotes() {
-        return executionNotes;
-    }
-
-    public void setExecutionNotes(String executionNotes) {
-        this.executionNotes = executionNotes;
     }
 }

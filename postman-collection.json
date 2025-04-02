@@ -76,10 +76,6 @@
             "value": "application/json"
           }
         ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"executionNotes\": \"Door handle replaced and tested. Working properly now.\"\n}"
-        },
         "url": {
           "raw": "http://localhost:8080/workorders/{{workOrderId}}/execute",
           "protocol": "http",

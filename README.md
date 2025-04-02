@@ -17,14 +17,15 @@ This application demonstrates how to build an event-sourced system using Axon Fr
 - Axon Framework
 - MySQL (for the query database)
 - Axon Server (for event sourcing)
-- Docker
+- Docker & Docker Compose
 
 ## Prerequisites
 
 Before running this application, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 17** or higher
-- **Docker Desktop** for running containerized services
+- **Maven** for building the project
+- **Docker** for running containerized services
 - **Postman** (optional) for testing the API
 
 ## Setup and Installation
@@ -40,8 +41,8 @@ cd workorder-management
 
 The application requires Axon Server and MySQL to be running. A Docker Compose file is provided for easy setup.
 
+Navigate to the `docker` directory and run:
 ```bash
-navigate to docker folder (cd docker)
 docker-compose up -d
 ```
 
@@ -55,8 +56,8 @@ You can verify that Axon Server is running by visiting http://localhost:8024 in 
 
 ```bash
 mvn clean install
-Run the application
 ```
+Run the application in your IDE
 
 The application will start and connect to both Axon Server and MySQL. It will be accessible at http://localhost:8080.
 
@@ -71,12 +72,39 @@ The application exposes the following REST endpoints:
 | PUT | `/workorders/{id}/execute` | Mark a work order as executed |
 | GET | `/workorders/{id}` | Retrieve a work order by ID |
 
+### API Examples
+
+#### Create a Work Order
+```bash
+curl -X POST http://localhost:8080/workorders \
+  -H "Content-Type: application/json" \
+  -d '{"instruction": "Replace the broken door handle in room 101"}'
+```
+
+#### Assign a Work Order
+```bash
+curl -X PUT http://localhost:8080/workorders/{id}/assign \
+  -H "Content-Type: application/json" \
+  -d '{"assignee": "John Smith"}'
+```
+
+#### Execute a Work Order
+```bash
+curl -X PUT http://localhost:8080/workorders/{id}/execute \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+#### Get a Work Order
+```bash
+curl -X GET http://localhost:8080/workorders/{id}
+```
 
 ## Postman Collection
 
 A Postman collection is included in the repository for easy testing of the API. To use it:
 
-1. Import the `postman-collection.json` file into Postman
+1. Import the `WorkOrder_API.postman_collection.json` file into Postman
 2. Execute the requests in sequence (Create → Assign → Execute → Get)
 3. The collection automatically stores the work order ID from the creation response
 
@@ -99,6 +127,19 @@ The application follows the CQRS and Event Sourcing patterns:
 - The aggregate state can be reconstructed from the event stream
 
 ## Troubleshooting
-Identified issues why spring boot application was not connecting to axon server: problem seems be running spring boot version above 3.1.5. When downgraded from 3.4.4 -> 3.1.5 the connection was successfull.
 
-Identified issues with Lombok annotation procession together with AggregateIdentifier, removed lombok third party dependency to set up classes with code instead.
+### Connection Issues with Axon Server
+If you encounter connection issues with Axon Server, verify that:
+- The Docker container is running: `docker ps | grep axon-server`
+- The ports are properly exposed: `netstat -an | grep 8124`
+- There are no firewall issues blocking the connection
+
+### Database Connection Issues
+For MySQL connection problems:
+- Check if the container is running: `docker ps | grep mysql`
+- Verify the connection details in application.properties
+- Try connecting directly: `mysql -h localhost -P 3306 -u axonuser -p`
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

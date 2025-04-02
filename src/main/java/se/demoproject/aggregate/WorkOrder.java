@@ -37,8 +37,7 @@ public class WorkOrder {
     @CommandHandler
     public void handle(ExecuteWorkOrderCommand command) {
         AggregateLifecycle.apply(new WorkOrderExecutedEvent(
-                command.getId(),
-                command.getExecutionNotes()));
+                command.getId()));
     }
 
     @EventSourcingHandler

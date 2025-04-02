@@ -7,6 +7,7 @@ import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.web.bind.annotation.*;
 import se.demoproject.api.queries.FindWorkOrderQuery;
 import se.demoproject.api.queries.WorkOrderQueryResponse;
+import se.demoproject.api.request.AssignWorkOrderRequest;
 import se.demoproject.command.AssignWorkOrderCommand;
 import se.demoproject.command.CreateWorkOrderCommand;
 import se.demoproject.command.ExecuteWorkOrderCommand;
@@ -30,15 +31,14 @@ public class WorkOrderController {
     }
 
     @PutMapping({"{id}/assign"})
-    public CompletableFuture<Void> assignWorkOrder(@PathVariable String id, @RequestBody AssignWorkOrderCommand command) {
-        return commandGateway.send(new AssignWorkOrderCommand(id, command.getAssignedTo()));
+    public CompletableFuture<Void> assignWorkOrder(@PathVariable String id, @RequestBody AssignWorkOrderRequest request) {
+        return commandGateway.send(new AssignWorkOrderCommand(id, request.getAssignee()));
     }
 
     @PutMapping("{id}/execute")
-    public CompletableFuture<Void> executeWorkOrder(@PathVariable String id, @RequestBody ExecuteWorkOrderCommand command) {
+    public CompletableFuture<Void> executeWorkOrder(@PathVariable String id) {
         return commandGateway.send(new ExecuteWorkOrderCommand(
-                id,
-                command.getExecutionNotes()
+                id
         ));
     }
 
