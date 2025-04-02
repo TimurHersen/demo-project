@@ -1,3 +1,4 @@
+/*
 package se.demoproject.query.handler;
 
 import lombok.RequiredArgsConstructor;
@@ -62,3 +63,4 @@ public class WorkOrderQueryHandler {
     }
 
 }
+*/

@@ -1,9 +1,19 @@
 package se.demoproject.api.events;
 
-import lombok.Value;
-
-@Value
 public class WorkOrderCreatedEvent {
-    String orderId;
-    String instruction;
+    private final String id;
+    private final String instruction;
+
+    public WorkOrderCreatedEvent(String id, String instruction) {
+        this.id = id;
+        this.instruction = instruction;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
 }

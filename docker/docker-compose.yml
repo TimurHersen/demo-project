@@ -12,8 +12,8 @@ services:
       - axon-server-events:/eventdata
       - axon-server-config:/config
     environment:
-      - AXONSERVER_HOSTNAME=localhost
-      - AXONSERVER_INTERNAL_HOSTNAME=localhost
+      - AXONSERVER_HOSTNAME=axon-server
+      - AXONSERVER_INTERNAL_HOSTNAME=axon-server
       - AXONSERVER_NAME=axon-server
       - AXONSERVER_DEVMODE_ENABLED=true
       - AXONSERVER_ACCESSCONTROL_ENABLED=false
@@ -22,11 +22,11 @@ services:
       - axon-network
     restart: unless-stopped
 
+networks:
+  axon-network:
+    driver: bridge
+
 volumes:
   axon-server-data:
   axon-server-events:
   axon-server-config:
-
-networks:
-  axon-network:
-    driver: bridge

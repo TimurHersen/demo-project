@@ -24,9 +24,7 @@ public class WorkOrder {
 
     @CommandHandler
     public WorkOrder(CreateWorkOrderCommand command) {
-        AggregateLifecycle.apply(new WorkOrderCreatedEvent(
-                command.getId(),
-                command.getInstruction()));
+        AggregateLifecycle.apply(new WorkOrderCreatedEvent(command.getId(), command.getInstruction()));
     }
 
     @CommandHandler
@@ -45,7 +43,7 @@ public class WorkOrder {
 
     @EventSourcingHandler
     public void on(WorkOrderCreatedEvent event) {
-        this.orderId = event.getOrderId();
+        this.orderId = event.getId();
     }
 
 }

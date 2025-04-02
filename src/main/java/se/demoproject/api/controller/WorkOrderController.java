@@ -1,3 +1,4 @@
+/*
 package se.demoproject.api.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -51,3 +52,4 @@ public class WorkOrderController {
     }
 
 }
+*/
