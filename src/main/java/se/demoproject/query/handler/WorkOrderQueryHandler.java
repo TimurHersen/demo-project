@@ -1,10 +1,8 @@
-/*
 package se.demoproject.query.handler;
 
 import lombok.RequiredArgsConstructor;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 import se.demoproject.api.events.WorkOrderAssignedEvent;
 import se.demoproject.api.events.WorkOrderCreatedEvent;
@@ -18,12 +16,12 @@ import se.demoproject.query.repository.WorkOrderRepository;
 @RequiredArgsConstructor
 public class WorkOrderQueryHandler {
 
-    WorkOrderRepository workOrderRepository;
+    private final WorkOrderRepository workOrderRepository;
 
     @EventHandler
     public void on(WorkOrderCreatedEvent event) {
         WorkOrderEntity workOrderEntity = new WorkOrderEntity();
-        workOrderEntity.setId(event.getOrderId());
+        workOrderEntity.setId(event.getId());
         workOrderEntity.setInstruction(event.getInstruction());
         workOrderEntity.setStatus("CREATED");
         workOrderRepository.save(workOrderEntity);
@@ -63,4 +61,3 @@ public class WorkOrderQueryHandler {
     }
 
 }
-*/

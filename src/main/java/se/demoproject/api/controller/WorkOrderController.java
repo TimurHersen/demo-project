@@ -1,4 +1,3 @@
-/*
 package se.demoproject.api.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -12,6 +11,7 @@ import se.demoproject.command.AssignWorkOrderCommand;
 import se.demoproject.command.CreateWorkOrderCommand;
 import se.demoproject.command.ExecuteWorkOrderCommand;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -25,7 +25,7 @@ public class WorkOrderController {
     @PostMapping()
     public CompletableFuture<String> createWorkOrder(@RequestBody CreateWorkOrderCommand command) {
         return commandGateway.send(new CreateWorkOrderCommand(
-                command.getId(),
+                UUID.randomUUID().toString(),
                 command.getInstruction()));
     }
 
@@ -52,4 +52,3 @@ public class WorkOrderController {
     }
 
 }
-*/

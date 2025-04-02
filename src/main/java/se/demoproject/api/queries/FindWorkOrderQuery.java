@@ -1,8 +1,20 @@
 package se.demoproject.api.queries;
 
-import lombok.Value;
-
-@Value
 public class FindWorkOrderQuery {
-    String id;
+    private String id;
+
+    public FindWorkOrderQuery() {
+    }
+
+    public FindWorkOrderQuery(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
