@@ -60,9 +60,9 @@ public class WorkOrderQueryHandler {
                 .map(workOrderEntity -> new WorkOrderQueryResponse(
                         workOrderEntity.getId(),
                         workOrderEntity.getInstruction(),
-                        workOrderEntity.getStatus(),
-                        workOrderEntity.getAssignee()
-                )).orElseThrow(() -> new RuntimeException("Could not find work order"));
+                        workOrderEntity.getAssignee(),
+                        workOrderEntity.getStatus()
+                )).orElseThrow(() -> new WorkOrderNotFoundException(query.getId()));
     }
 
 }
