@@ -153,14 +153,9 @@ The application follows the CQRS and Event Sourcing patterns:
 If you encounter connection issues with Axon Server, verify that:
 - The Docker container is running: `docker ps | grep axon-server`
 - The ports are properly exposed: `netstat -an | grep 8124`
-- There are no firewall issues blocking the connection
 
 ### Database Connection Issues
 For MySQL connection problems:
 - Check if the container is running: `docker ps | grep mysql`
 - Verify the connection details in application.properties
 - Try connecting directly: `mysql -h localhost -P 3306 -u axonuser -p`
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
