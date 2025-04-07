@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import se.demoproject.api.events.WorkOrderAssignedEvent;
 import se.demoproject.api.events.WorkOrderCreatedEvent;
 import se.demoproject.api.events.WorkOrderExecutedEvent;
+import se.demoproject.api.exception.InvalidWorkOrderStateException;
+import se.demoproject.api.exception.WorkOrderNotFoundException;
 import se.demoproject.api.queries.FindWorkOrderQuery;
 import se.demoproject.api.queries.WorkOrderQueryResponse;
 import se.demoproject.query.entity.WorkOrderEntity;
@@ -29,7 +31,8 @@ public class WorkOrderQueryHandler {
 
     @EventHandler
     public void on(WorkOrderAssignedEvent event) {
-        WorkOrderEntity workOrderEntity = workOrderRepository.findById(event.getId()).orElse(null);
+        WorkOrderEntity workOrderEntity = workOrderRepository.findById(event.getId())
+                .orElseThrow(() -> new WorkOrderNotFoundException(event.getId()));
 
         if (workOrderEntity != null) {
             workOrderEntity.setAssignee(event.getAssignee());
@@ -40,12 +43,15 @@ public class WorkOrderQueryHandler {
 
     @EventHandler
     public void on(WorkOrderExecutedEvent event) {
-        WorkOrderEntity workOrderEntity = workOrderRepository.findById(event.getId()).orElse(null);
+        WorkOrderEntity workOrderEntity = workOrderRepository.findById(event.getId())
+                .orElseThrow(() -> new WorkOrderNotFoundException(event.getId()));
 
-        if (workOrderEntity != null) {
-            workOrderEntity.setStatus("EXECUTED");
-            workOrderRepository.save(workOrderEntity);
+        if(workOrderEntity.getAssignee() == null || workOrderEntity.getAssignee().isEmpty()) {
+            throw new InvalidWorkOrderStateException("Work order must be assigned before execution", event.getId());
         }
+
+        workOrderEntity.setStatus("EXECUTED");
+        workOrderRepository.save(workOrderEntity);
     }
 
     @QueryHandler
